@@ -1,77 +1,53 @@
-# blazefuck
+# latinify
 
-A blazingly-fast (interactive) Brainfuck interpreter, written in Rust.<br><br>
+Just another super-typical Pig Latin translator...you already know what to expect 😂<br><br>
 
 ## Description
 
-A tiny, efficient [Brainfuck](https://esolangs.org/wiki/Brainfuck) interpreter, with a REPL for easy, on-the-fly evaluation
+A pretty simple bare-bones [Pig Latin](https://en.wikipedia.org/wiki/Pig_Latin) translator...that's literally it.
 
-Brainfuck is a simple esoteric language with a minimal subset of commands, you can read more [here](https://en.wikipedia.org/wiki/Brainfuck#:~:text=Brainfuck%20is%20an%20esoteric%20programming%20language%20created%20in%201993%20by%20Urban%20M%C3%BCller.).
+Pig Latin is a fun little "language" of sorts, where the meaning of words are obsufcated through bleeding-edge encryption techniques, rendering the sentence intelligible to the untrained eye.
+
+But you wouldn't dare do that by hand, would you?
 <br><br>
 ## Getting Started
 
 ### Dependencies
 
-* Install the [rustup](https://rustup.rs/) toolchain for your system.
+* Install the [Rustup](https://rustup.rs/) toolchain for your system.
 
 ### Installing
 
-* Add Cargo's binary directory to your path environment variables<br>The rustup installer should do this for you, but if not, it should be located at `~/.cargo/bin` (Linux) or `%USERPROFILE\.cargo\bin` (Windows).
-* Simply run `cargo install blazefuck` at a terminal and it'll be installed from crates.io.
+* Add Cargo's binary directory to your path environment variables.<br>The rustup installer should do this for you, but if not, it should be located at `~/.cargo/bin` (Linux) or `%USERPROFILE\.cargo\bin` (Windows).
+* Simply run `cargo install latinify` at a terminal and it'll be installed from crates.io.
 
 ### Executing program
 
-* Type `blazefuck` at a prompt
+* Type `latinify` at a prompt
 
 ```
-$ blazefuck
-blazefuck 1.0.0 on windows, run with "-h" or "--help" for more information.
-Use "cells" to show the cell stack and "exit" to exit the interpreter.
->>> _
+$ latinify
+Welcome to latinify! Type a sentence and press Return/Enter to get started...
+> _
 ```
-<br>
-You can then use the normal Brainfuck commands, as follows:
-
-|       |                                                                                                                                                                                   |
-|-------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **>** | Increment the data pointer (to point to the next cell to the right).                                                                                                              |
-| **<** | Decrement the data pointer (to point to the next cell to the left).                                                                                                               |
-| **+** | Increment (increase by one) the byte at the data pointer.                                                                                                                         |
-| **-** | Decrement (decrease by one) the byte at the data pointer.                                                                                                                         |
-| **.** | Output the byte at the data pointer.                                                                                                                                              |
-| **,** | Accept one byte of input, storing its value in the byte at the data pointer.                                                                                                      |
-| **[** | If the byte at the data pointer is zero, then instead of moving the instruction pointer forward to the next command, jump it forward to the command after the matching ] command. |
-| **]** | If the byte at the data pointer is nonzero, then instead of moving the instruction pointer forward to the next command, jump it back to the command after the matching [ command. |
-
-Also `cells` and `exit` will show the current cell stack and exit the REPL, respectively.<br><br>
-* Alternatively a source file can be specified with `blazefuck [FILE]`, some examples can be found [here](examples).
+* You can then simply type the sentence you want to be translated, and hit the Return/Enter key on your keyboard to translate it.
 ```
-$ blazefuck hello.bf
-Hello World!
+> Hello, World! It's a beautiful day today...
+Ellohay, Orldway! Ithay'say ahay beautifulay dayay todayay...
 
-$ _
+> _
 ```
-
-* Some flags can be specified as follows:
-```
--d, --debug     Shows the cell stack after every command
--s, --strict    Activates strict mode
-```
-
-* Strict mode has some key differences, as opposed to normal mode, some programs will not run well with it enabled.<br>It:
-    * Disallows access of any cells not between #1 and #30000, normal mode wraps around to the beginning or end.
-    * Disallows cell data being incremented or decremented past 0-255, normal mode also wraps around.<br><br>
-
+<br>Typing `:exit` will quit the interpreter.<br><br>
 ## Building from source
 
 * Clone this repository
 ```
-$ git clone https://github.com/poopsicles/blazefuck
+$ git clone https://github.com/poopsicles/latinify
 ```
 
 * Switch to the newly created directory 
 ```
-$ cd ./blazefuck
+$ cd ./latinify
 ```
 
 * Compile using cargo
@@ -79,7 +55,7 @@ $ cd ./blazefuck
 $ cargo build
 ```
 
-* Cargo will grab the required dependencies and create the binary at `./target/debug/blazefuck`<br><br>
+* Cargo will grab the required dependencies and create the binary at `./target/debug/latinify`<br><br>
 
 ## Version History
 
