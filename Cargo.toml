@@ -1,11 +1,13 @@
 [package]
 name = "latinify"
-version = "0.1.0"
+version = "1.0.0"
 edition = "2021"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+description = "Just another super-simple Pig Latin translator..."
+readme = "README.md"
+repository = "https://github.com/poopsicles/latinify"
+license = "MIT"
+keywords = ["pig-latin", "translator"]
+categories = ["command-line-utilities"]
 
 [dependencies]
-clap = { version = "3.1.18", features = ["derive"] }
 rayon = "1.5"
-anyhow = "1.0.57"

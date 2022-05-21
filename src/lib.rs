@@ -1,45 +1,43 @@
 #[inline]
-fn is_vowel(ch: &char) -> bool {
-    // checks if a character is a vowel
+fn is_vowel(ch: &char) -> bool { // checks if a character is a vowel
     match ch.to_ascii_lowercase() {
         'a' | 'e' | 'i' | 'o' | 'u' => true,
         _ => false,
     }
 }
 
-#[derive(Debug)]
-pub enum Kind { // used to differentiate between actual words and contiguous characters
+pub enum Sequence { // used to differentiate between actual words and contiguous character seqeunces
     Word(String),
     Characters(String),
 }
 
-impl Kind {
+impl Sequence {
     fn push(&mut self, ch: &char) { // adds a character to the inner value
         match self {
-            Kind::Characters(s) => s.push(*ch),
-            Kind::Word(s) => s.push(*ch),
+            Sequence::Characters(s) => s.push(*ch),
+            Sequence::Word(s) => s.push(*ch),
         }
     }
 }
 
-pub fn tokenise(s: &str) -> Vec<Kind> { // tokenises a string into words and characters
-    let mut is_prev_char = false; // for storing whether the previous character was a character
-    let mut res: Vec<Kind> = vec![];
+pub fn tokenise(s: &str) -> Vec<Sequence> { // tokenises a string into words and characters
+    let mut is_prev_char = false; // for storing whether the previous character was a word or not
+    let mut res: Vec<Sequence> = vec![];
 
     for ch in s.chars() {
-        match (ch.is_alphabetic(), is_prev_char) {
-            (true, false) => {
-                res.push(Kind::Word(ch.to_string()));
+        match (ch.is_alphabetic(), is_prev_char) { // check the previous character, and push to it or switch Sequences
+            (true, false) => { 
+                res.push(Sequence::Word(ch.to_string()));
                 is_prev_char = true;
             }
 
-            (false, true) => {
-                res.push(Kind::Characters(ch.to_string()));
+            (false, true) => { 
+                res.push(Sequence::Characters(ch.to_string()));
                 is_prev_char = false;
             }
 
             (_, _) => {
-                let mut previous = res.pop().unwrap_or(Kind::Characters(String::new()));
+                let mut previous = res.pop().unwrap_or(Sequence::Characters(String::new()));
                 previous.push(&ch);
                 res.push(previous);
             }
@@ -56,8 +54,7 @@ pub fn latinifier(s: &str) -> String { // returns the Pig Latin version of a wor
 	let first = s.chars().next().unwrap(); 
 	let second = s.chars().nth(1).unwrap_or(' '); 
 
-    for (position, letter) in s.char_indices() {
-        // gets the index of the first vowel
+    for (position, letter) in s.char_indices() { // gets the index of the first vowel
         if is_vowel(&letter) {
             vow = position;
             break;
